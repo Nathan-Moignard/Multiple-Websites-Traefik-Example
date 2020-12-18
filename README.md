@@ -9,5 +9,5 @@ docker-compose up
 
 Websites are available at the following addresses :
 
-First Website: http://httpd1.localhost\
-Second Website: http://httpd2.localhost
+- First Website: [http://httpd1.localhost](http://httpd1.localhost)
+- Second Website: [http://httpd2.localhost](http://httpd2.localhost)
