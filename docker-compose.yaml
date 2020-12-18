@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  reverse-proxy:
+    image: traefik:v2.4
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  httpd1:
+    container_name: httpd1
+    image: httpd:2.4-alpine
+    labels:
+      - "traefik.http.routers.httpd1.rule=Host(`httpd1.localhost`)"
+    volumes:
+      - "./Sites/1/html/:/usr/local/apache2/htdocs/"
+      - "./Sites/1/httpd.conf:/usr/local/apache2/conf/httpd.conf"
+
+  httpd2:
+    container_name: httpd2
+    image: httpd:2.4-alpine
+    labels:
+      - "traefik.http.routers.httpd2.rule=Host(`httpd2.localhost`)"
+    volumes:
+      - "./Sites/2/html/:/usr/local/apache2/htdocs/"
+      - "./Sites/2/httpd.conf:/usr/local/apache2/conf/httpd.conf"
